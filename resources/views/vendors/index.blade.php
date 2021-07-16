@@ -25,6 +25,7 @@
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
                         <th>{{ __('vendor.name') }}</th>
+                        <th>Email</th>
                         <th>{{ __('app.notes') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
@@ -34,6 +35,7 @@
                     <tr>
                         <td class="text-center">{{ $vendors->firstItem() + $key }}</td>
                         <td>{{ $vendor->name }}</td>
+                        <td>{{ $vendor->email     }}</td>
                         <td>{{ $vendor->notes }}</td>
                         <td class="text-center">
                             {{ link_to_route('vendors.show', __('app.show'), $vendor) }} |

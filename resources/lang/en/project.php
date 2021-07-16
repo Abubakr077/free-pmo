@@ -67,7 +67,7 @@ return [
     'no_jobs'       => 'Job list is empty.',
     'cost_proposal' => 'Cost Proposal',
     'invoices'      => 'Invoice List',
-    'customer'      => 'Customer',
+    'customer'      => 'Supervisor',
     'worker'        => 'Worker',
     'subscriptions' => 'Subscriptions',
     'status'        => 'Project Status',

@@ -22,9 +22,9 @@ class InstallationController extends Controller
 
     public function index()
     {
-        if (User::count()) {
-            return redirect()->route('auth.login');
-        }
+//        if (User::count()) {
+//            return redirect()->route('auth.login');
+//        }
 
         return view('auth.app-install');
     }

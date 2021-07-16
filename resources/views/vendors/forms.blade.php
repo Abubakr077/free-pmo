@@ -11,6 +11,8 @@
     {!! Form::model($editableVendor, ['route' => ['vendors.update', $editableVendor->id], 'method' => 'patch']) !!}
     {!! FormField::text('name', ['required' => true]) !!}
     {!! FormField::text('website') !!}
+    {!! FormField::text('email') !!}
+    {!! FormField::text('password') !!}
     {!! FormField::radios('is_active', [__('app.in_active'), __('app.active')]) !!}
     {!! FormField::textarea('notes') !!}
     @if (request('q'))

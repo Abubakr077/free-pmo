@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Partners;
 use App\Entities\Partners\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Version;
 
 class VendorsController extends Controller
 {
@@ -55,9 +56,12 @@ class VendorsController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
+
         $vendor->update($request->validate([
             'name'      => 'required|max:60',
             'notes'     => 'nullable|max:255',
+            'email'     => 'nullable|max:255',
+            'password'     => 'nullable|max:255',
             'website'   => 'nullable|url|max:255',
             'is_active' => 'required|boolean',
         ]));

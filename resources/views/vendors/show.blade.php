@@ -16,6 +16,7 @@
             <table class="table table-condensed">
                 <tbody>
                     <tr><td class="col-xs-3">{{ __('vendor.name') }}</td><td>{{ $vendor->name }}</td></tr>
+                    <tr><td>{{ __('vendor.email') }}</td><td>{{ $vendor->email }}</td></tr>
                     <tr><td>{{ __('vendor.website') }}</td><td>{{ $vendor->website }}</td></tr>
                     <tr><td>{{ __('app.status') }}</td><td>{{ $vendor->status }}</td></tr>
                     <tr><td>{{ __('app.notes') }}</td><td>{!! nl2br($vendor->notes) !!}</td></tr>

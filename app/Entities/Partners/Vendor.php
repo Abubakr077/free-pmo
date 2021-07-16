@@ -11,7 +11,7 @@ class Vendor extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'notes', 'website', 'is_active'];
+    protected $fillable = ['name', 'notes','email','password', 'website', 'is_active'];
 
     /**
      * Vendor has many payments relation.

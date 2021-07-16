@@ -69,6 +69,7 @@ class ProjectsController extends Controller
      */
     public function store(CreateRequest $request)
     {
+
         $this->authorize('create', new Project());
 
         $project = $this->repo->create($request->except('_token'));
