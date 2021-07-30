@@ -54,17 +54,17 @@ class ProjectsRepository extends BaseRepository
     {
 
         $projectData['project_value'] =  0;
-        $projectData['customer_id'] = $projectData['supervisor_id'];
-        $projectData['customer_name'] = $projectData['supervisor_name'];
-        $projectData['customer_email'] = $projectData['supervisor_email'];
-        DB::beginTransaction();
-
-        if (isset($projectData['customer_id']) == false || $projectData['customer_id'] == '') {
-            $customer = $this->createNewCustomer($projectData['customer_name'], $projectData['customer_email']);
-            $projectData['customer_id'] = $customer->id;
-        }
-        unset($projectData['customer_name']);
-        unset($projectData['customer_email']);
+//        $projectData['customer_id'] = $projectData['supervisor_id'];
+//        $projectData['customer_name'] = $projectData['supervisor_name'];
+//        $projectData['customer_email'] = $projectData['supervisor_email'];
+//        DB::beginTransaction();
+//
+//        if (isset($projectData['customer_id']) == false || $projectData['customer_id'] == '') {
+//            $customer = $this->createNewCustomer($projectData['customer_name'], $projectData['customer_email']);
+//            $projectData['customer_id'] = $customer->id;
+//        }
+//        unset($projectData['customer_name']);
+//        unset($projectData['customer_email']);
 
         $project = $this->storeArray($projectData);
         DB::commit();

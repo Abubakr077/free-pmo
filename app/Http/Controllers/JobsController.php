@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Projects\Comment;
+use App\Entities\Projects\File;
 use App\Entities\Projects\Job;
 use App\Entities\Projects\JobsRepository;
 use App\Entities\Projects\Project;
+use App\Entities\Projects\Task;
 use App\Http\Requests\Jobs\DeleteRequest;
 use App\Http\Requests\Jobs\UpdateRequest;
 use Illuminate\Http\Request;
@@ -21,7 +23,9 @@ class JobsController extends Controller
      * @var \App\Entities\Projects\JobsRepository
      */
     private $repo;
-
+    private $fileableTypes = [
+        'projects' => 'App\Entities\Projects\Task',
+    ];
     /**
      * Create new Jobs Controller.
      *
@@ -75,6 +79,17 @@ class JobsController extends Controller
 
         if ($request->get('action') == 'task_delete' && $request->has('task_id')) {
             $editableTask = $this->repo->requireTaskById($request->get('task_id'));
+        }
+        if ($editableTask){
+            $model = Task::findOrFail($editableTask->id);
+            $files = $model->files;
+//            return $files;
+
+            if (in_array($request->get('action'), ['edit', 'delete']) && $request->has('id')) {
+                $editableFile = File::find($request->get('id'));
+            }
+            // $modelShortName => $model, 'files' => $files, 'editableFile' => $editableFile
+            return view('jobs.show',compact('job', 'editableTask', 'comments', 'editableComment','files'));
         }
 
         if (request('action') == 'comment-edit' && request('comment_id') != null) {
@@ -161,5 +176,15 @@ class JobsController extends Controller
 
             return 'oke';
         }
+    }
+
+    public function getModelName($fileableType)
+    {
+        return isset($this->fileableTypes[$fileableType]) ? $this->fileableTypes[$fileableType] : false;
+    }
+
+    public function getModelShortName($modelName)
+    {
+        return strtolower((new \ReflectionClass($modelName))->getShortName());
     }
 }

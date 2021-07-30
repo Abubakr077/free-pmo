@@ -86,7 +86,7 @@ class ProjectsController extends Controller
      */
     public function show(Project $project)
     {
-        $this->authorize('view', $project);
+//        $this->authorize('view', $project);
 
         return view('projects.show', compact('project'));
     }
@@ -99,7 +99,7 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        $this->authorize('update', $project);
+//        $this->authorize('update', $project);
 
         $customers = $this->repo->getCustomersList();
 
@@ -115,7 +115,7 @@ class ProjectsController extends Controller
      */
     public function update(UpdateRequest $request, Project $project)
     {
-        $this->authorize('update', $project);
+//        $this->authorize('update', $project);
 
         $project = $this->repo->update($request->validated(), $project->id);
         flash(trans('project.updated'), 'success');

@@ -38,6 +38,8 @@ return [
     'roles' => [
         'admin'  => 'Administrator',
         'worker' => 'Worker',
+        'supervisor' => 'Supervisor',
+        'student' => 'Student',
     ],
 
     // Relations

@@ -29,22 +29,5 @@
         </div>
         </a>
     </div>
-    @can('see-pricings', $project)
-    <div class="col-lg-6 col-md-12">
-        <a href="{{ route('projects.jobs.index',[$project->id]) }}" title="Collectible Earnings">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-12 text-right">
-                        <i class="fa fa-money fa-2x pull-left"></i>
-                        <div class="lead">Collectibe Earnings</div>
-                        <div class="lead" style="font-size: 30px;">{{ format_money($project->getCollectibeEarnings()) }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </a>
-    </div>
-    @endcan
     <div class="clearfix"></div>
 </div>

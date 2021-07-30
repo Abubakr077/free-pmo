@@ -103,17 +103,17 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-6">{!! FormField::text('name', ['label' => __('task.name')]) !!}</div>
-            <div class="col-md-4">
-                {{ Form::label('progress', __('task.progress'), ['class' => 'control-label']) }}
-                {{ Form::input('range', 'progress', 0, [
-                    'min' => '0', 'max' => '100', 'step' => '10',
-                ]) }}
-            </div>
-            <div class="col-md-2" style="font-size: 28px; margin-top: 15px;">
-                <strong id="ap_weight">0</strong>%
-            </div>
+{{--            <div class="col-md-4">--}}
+{{--                {{ Form::label('progress', __('task.progress'), ['class' => 'control-label']) }}--}}
+{{--                {{ Form::input('range', 'progress', 0, [--}}
+{{--                    'min' => '0', 'max' => '100', 'step' => '10',--}}
+{{--                ]) }}--}}
+{{--            </div>--}}
+{{--            <div class="col-md-2" style="font-size: 28px; margin-top: 15px;">--}}
+{{--                <strong id="ap_weight">0</strong>%--}}
+{{--            </div>--}}
         </div>
-        {!! FormField::textarea('description', ['label' => __('task.description')]) !!}
+{{--        {!! FormField::textarea('description', ['label' => __('task.description')]) !!}--}}
         {{ Form::submit(__('task.create'), ['class' => 'btn btn-primary']) }}
         {{ Form::close() }}
     </div>

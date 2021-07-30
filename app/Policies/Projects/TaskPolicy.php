@@ -34,7 +34,8 @@ class TaskPolicy
     public function update(User $user, Task $task)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $task->job->worker_id == $user->id);
+            || ($user->hasRole('worker')
+                && $task->job->worker_id == $user->id);
     }
 
     /**

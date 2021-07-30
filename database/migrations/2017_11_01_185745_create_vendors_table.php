@@ -18,7 +18,7 @@ class CreateVendorsTable extends Migration
             $table->string('name', 60);
             $table->string('website')->nullable();
             $table->string('email');
-            $table->string('password')->default('123456');;
+            $table->string('password')->default('123456');
             $table->boolean('is_active')->default(1);
             $table->string('notes')->nullable();
             $table->timestamps();

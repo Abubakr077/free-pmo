@@ -26,7 +26,8 @@ class ProjectPolicy
     public function view(User $user, Project $project)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $user->projects->contains($project->id));
+            || ($user->hasRole('worker')
+                && $user->projects->contains($project->id));
     }
 
     /**
@@ -39,7 +40,8 @@ class ProjectPolicy
      */
     public function create(User $user, Project $project)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin')||
+            $user->hasRole('supervisor');
     }
 
     /**
@@ -52,7 +54,8 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin')||
+            $user->hasRole('supervisor');
     }
 
     /**
@@ -79,7 +82,9 @@ class ProjectPolicy
     public function viewJobs(User $user, Project $project)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $user->projects->contains($project->id));
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+                && $user->projects->contains($project->id));
     }
 
     /**
@@ -132,7 +137,9 @@ class ProjectPolicy
     public function viewFiles(User $user, Project $project)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $user->projects->contains($project->id));
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+                && $user->projects->contains($project->id));
     }
 
     /**
@@ -159,7 +166,9 @@ class ProjectPolicy
     {
         // Admin and project workers can commenting on their project.
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $user->projects->contains($project->id));
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+                && $user->projects->contains($project->id));
     }
 
     /**

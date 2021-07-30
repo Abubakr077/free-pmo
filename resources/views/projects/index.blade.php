@@ -29,11 +29,7 @@
             <th class="text-right">{{ trans('project.overall_progress') }}</th>
             <th class="text-center">{{ trans('project.due_date') }}</th>
             @endif
-            @can('see-pricings', new App\Entities\Projects\Project)
-            <th class="text-right">{{ trans('project.project_value') }}</th>
-            @endcan
             <th class="text-center">{{ trans('app.status') }}</th>
-            <th>{{ trans('project.customer') }}</th>
             <th>{{ trans('app.action') }}</th>
         </thead>
         <tbody>
@@ -47,11 +43,10 @@
                 <td class="text-right">{{ format_decimal($project->getJobOveralProgress()) }} %</td>
                 <td class="text-center">{{ $project->due_date }}</td>
                 @endif
-                @can('see-pricings', new App\Entities\Projects\Project)
-                <td class="text-right">{{ format_money($project->project_value) }}</td>
-                @endcan
+{{--                @can('see-pricings', new App\Entities\Projects\Project)--}}
+{{--                <td class="text-right">{{ format_money($project->project_value) }}</td>--}}
+{{--                @endcan--}}
                 <td class="text-center">{{ $project->present()->status }}</td>
-                <td>{{ $project->customer->name }}</td>
                 <td>
                     {!! html_link_to_route('projects.show', '', [$project->id], ['icon' => 'search', 'class' => 'btn btn-info btn-xs', 'title' => trans('app.show')]) !!}
                     {!! html_link_to_route('projects.edit', '', [$project->id], ['icon' => 'edit', 'class' => 'btn btn-warning btn-xs', 'title' => trans('app.edit')]) !!}

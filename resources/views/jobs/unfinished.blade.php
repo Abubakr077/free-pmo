@@ -21,9 +21,6 @@
             <th>{{ __('job.name') }}</th>
             <th class="text-center">{{ __('job.tasks_count') }}</th>
             <th class="text-center">{{ __('job.progress') }}</th>
-            @can('see-pricings', new App\Entities\Projects\Job)
-            <th class="text-right">{{ __('job.price') }}</th>
-            @endcan
             <th>{{ __('job.worker') }}</th>
             <th>{{ __('app.action') }}</th>
         </thead>
@@ -47,9 +44,6 @@
                 </td>
                 <td class="text-center">{{ $job->tasks_count = $job->tasks->count() }}</td>
                 <td class="text-center">{{ format_decimal($job->progress) }} %</td>
-                @can('see-pricings', $job)
-                <td class="text-right">{{ format_money($job->price) }}</td>
-                @endcan
                 <td>{{ $job->worker->name }}</td>
                 <td>
                     {{ link_to_route('jobs.show', __('app.show'), [$job], ['class' => 'btn btn-info btn-xs']) }}
@@ -64,9 +58,6 @@
                 <th class="text-right" colspan="3">{{ __('app.total') }}</th>
                 <th class="text-center">{{ $jobs->sum('tasks_count') }}</th>
                 <th class="text-center">{{ format_decimal($jobs->avg('progress')) }} %</th>
-                @can('see-pricings', new App\Entities\Projects\Job)
-                <th class="text-right">{{ format_money($jobs->sum('price')) }}</th>
-                @endcan
                 <th colspan="2"></th>
             </tr>
         </tfoot>

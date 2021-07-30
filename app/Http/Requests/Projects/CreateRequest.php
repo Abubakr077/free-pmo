@@ -28,9 +28,9 @@ class CreateRequest extends Request
             'name'           => 'required|max:50',
             'proposal_date'  => 'nullable|date|date_format:Y-m-d',
             'proposal_value' => 'nullable|numeric',
-            'supervisor_id'    => 'nullable|numeric',
-            'supervisor_name'  => 'nullable|required_without:customer_id|max:60',
-            'supervisor_email' => 'nullable|required_without:customer_id|email|unique:users,email',
+//            'supervisor_id'    => 'nullable|numeric',
+//            'supervisor_name'  => 'nullable|required_without:customer_id|max:60',
+//            'supervisor_email' => 'nullable|required_without:customer_id|email|unique:users,email',
             'description'    => 'nullable|max:255',
         ];
     }

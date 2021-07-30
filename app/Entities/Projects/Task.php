@@ -25,4 +25,9 @@ class Task extends Model
     {
         return $this->belongsTo(Job::class, 'job_id');
     }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }

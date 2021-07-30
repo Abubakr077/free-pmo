@@ -15,22 +15,13 @@
             <div class="panel-heading"><h3 class="panel-title">{{ trans('project.create') }}</h3></div>
             <div class="panel-body">
                 {!! FormField::text('name', ['label' => trans('project.name')]) !!}
-                {!! FormField::select('supervisor_id', $customers, ['placeholder' => 'Select Supervisor']) !!}
-                <div class="row">
-                    <div class="col-md-6">
-                        {!! FormField::text('supervisor_name') !!}
-                    </div>
-                    <div class="col-md-6">
-                        {!! FormField::text('supervisor_email') !!}
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         {!! FormField::text('proposal_date', ['label' => trans('project.proposal_date')]) !!}
                     </div>
-{{--                    <div class="col-md-6">--}}
-{{--                        {!! FormField::price('proposal_value', ['label' => trans('project.proposal_value'), 'currency' => Option::get('money_sign', 'Rp')]) !!}--}}
-{{--                    </div>--}}
+                    <div class="col-md-6">
+                        {!! FormField::text('proposal_value', ['label' => 'Modules']) !!}
+                    </div>
                 </div>
                 {!! FormField::textarea('description', ['label' => trans('project.description')]) !!}
             </div>

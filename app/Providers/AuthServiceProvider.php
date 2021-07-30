@@ -40,6 +40,11 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasRole('admin');
             });
         }
+//        foreach ($this->getSupervisorPermissions() as $permission) {
+//            Gate::define($permission, function ($user) {
+//                return $user->hasRole('supervisor');
+//            });
+//        }
 
         Gate::define('manage_jobs', function ($user, $project) {
             return true;
@@ -58,6 +63,12 @@ class AuthServiceProvider extends ServiceProvider
             'manage_options',
             'manage_payments',
             'manage_subscriptions',
+        ];
+    }
+    protected function getSupervisorPermissions()
+    {
+        return [
+            'manage_agency'
         ];
     }
 }

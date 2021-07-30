@@ -27,10 +27,10 @@
                     {{ link_to_route('projects.jobs.index', __('app.done'), [$project], ['class' => 'btn btn-default btn-xs pull-right', 'style' => 'margin-top: -2px; margin-left: 6px; margin-right: -8px']) }}
                 @else
                     {{ link_to_route('projects.jobs.index', __('project.sort_jobs'), [$project, 'action' => 'sort_jobs', '#project-jobs'], ['class' => 'btn btn-default btn-xs pull-right', 'style' => 'margin-top: -2px; margin-left: 6px; margin-right: -8px']) }}
-                    @can('see-pricings', $project)
-                    {!! link_to_route('projects.jobs-export', __('project.jobs_list_export_html'), [$project, 'html', 'job_type' => $key], ['class' => '', 'target' => '_blank']) !!} |
-                    {!! link_to_route('projects.job-progress-export', __('project.jobs_progress_export_html'), [$project, 'html', 'job_type' => $key], ['class' => '', 'target' => '_blank']) !!}
-                    @endcan
+{{--                    @can('see-pricings', $project)--}}
+{{--                    {!! link_to_route('projects.jobs-export', __('project.jobs_list_export_html'), [$project, 'html', 'job_type' => $key], ['class' => '', 'target' => '_blank']) !!} |--}}
+{{--                    {!! link_to_route('projects.job-progress-export', __('project.jobs_progress_export_html'), [$project, 'html', 'job_type' => $key], ['class' => '', 'target' => '_blank']) !!}--}}
+{{--                    @endcan--}}
                 @endif
             @endcan
         </div>
@@ -56,9 +56,6 @@
             <th>{{ __('job.name') }}</th>
             <th class="text-center">{{ __('job.tasks_count') }}</th>
             <th class="text-center">{{ __('job.progress') }}</th>
-            @can('see-pricings', new App\Entities\Projects\Job)
-            <th class="text-right">{{ __('job.price') }}</th>
-            @endcan
             {{-- <th>{{ __('job.worker') }}</th> --}}
             <th class="text-center">{{ __('time.updated_at') }}</th>
             <th class="text-center">{{ __('app.action') }}</th>
@@ -83,9 +80,6 @@
                 </td>
                 <td class="text-center">{{ $job->tasks_count = $job->tasks->count() }}</td>
                 <td class="text-center">{{ format_decimal($job->progress) }} %</td>
-                @can('see-pricings', $job)
-                <td class="text-right">{{ format_money($job->price) }}</td>
-                @endcan
                 <td class="text-center">
                     {{ $job->updated_at->diffForHumans() }} <br>
                     {{ __('job.worker') }} : {{ $job->worker->name }}
@@ -111,9 +105,6 @@
                     <span title="Total Progress">{{ format_decimal($groupedJobs->sum('progress') / $groupedJobs->count()) }} %</span>
                     <span title="Overal Progress" style="font-weight:300">({{ format_decimal($project->getJobOveralProgress()) }} %)</span>
                 </th>
-                @can('see-pricings', new App\Entities\Projects\Job)
-                <th class="text-right">{{ format_money($groupedJobs->sum('price')) }}</th>
-                @endcan
                 <th colspan="2">
                     @can('update', $project)
                         @if (request('action') == 'sort_jobs')

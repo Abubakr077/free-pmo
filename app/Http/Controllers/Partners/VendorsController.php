@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Partners;
 
 use App\Entities\Partners\Vendor;
+use App\Entities\Users\User;
+use App\Entities\Users\UserRole;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use phpDocumentor\Reflection\DocBlock\Tags\Version;
 
 class VendorsController extends Controller
@@ -17,9 +20,11 @@ class VendorsController extends Controller
     public function index()
     {
         $editableVendor = null;
-        $vendorQuery = Vendor::query();
+        $vendorQuery = User::query();
         $vendorQuery->where('name', 'like', '%'.request('q').'%');
+        $vendorQuery->with('roles');
         $vendors = $vendorQuery->paginate(25);
+
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableVendor = Vendor::find(request('id'));
@@ -36,13 +41,18 @@ class VendorsController extends Controller
      */
     public function store(Request $request)
     {
-        Vendor::create($request->validate([
-            'name'    => 'required|max:60',
-            'notes'   => 'nullable|max:255',
-            'website' => 'nullable|url|max:255',
-        ]));
+
+        $adminData = $request->only('name', 'email', 'password');
+
+        $adminData['api_token'] = Str::random(32);
+        $adminData['password'] = bcrypt($adminData['password']);
+
+        $admin = User::create($adminData);
+        $admin->assignRole('student');
+
 
         flash(__('vendor.created'), 'success');
+
 
         return redirect()->route('vendors.index');
     }

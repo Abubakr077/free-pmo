@@ -26,7 +26,10 @@ class JobPolicy
     public function view(User $user, Job $job)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $job->worker_id == $user->id);
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+                || $user->hasRole('student')
+                && $job->worker_id == $user->id);
     }
 
     /**
@@ -39,7 +42,8 @@ class JobPolicy
      */
     public function create(User $user, Job $job)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin')
+            || $user->hasRole('supervisor');
     }
 
     /**
@@ -52,7 +56,8 @@ class JobPolicy
      */
     public function update(User $user, Job $job)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin')
+            || $user->hasRole('supervisor');
     }
 
     /**
@@ -65,7 +70,8 @@ class JobPolicy
      */
     public function delete(User $user, Job $job)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin')
+            || $user->hasRole('supervisor');
     }
 
     /**
@@ -92,7 +98,9 @@ class JobPolicy
     {
         // Admin and job workers can commenting on their job.
         return $user->hasRole('admin')
-            || ($user->hasRole('worker') && $job->worker_id == $user->id);
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+                && $job->worker_id == $user->id);
     }
 
     /**

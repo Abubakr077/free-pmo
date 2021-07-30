@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class FilesController extends Controller
 {
     private $fileableTypes = [
-        'projects' => 'App\Entities\Projects\Project',
+        'projects' => 'App\Entities\Projects\Task',
     ];
 
     public function index(Request $request, $fileableId)

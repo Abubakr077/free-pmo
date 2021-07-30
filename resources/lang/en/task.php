@@ -26,5 +26,5 @@ return [
     // Attributes
     'name'        => 'Task Name',
     'progress'    => 'Progress',
-    'description' => 'Task Description',
+    'description' => 'Answer Points',
 ];
