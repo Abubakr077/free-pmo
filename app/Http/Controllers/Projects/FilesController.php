@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class FilesController extends Controller
 {
     private $fileableTypes = [
-        'projects' => 'App\Entities\Projects\Task',
+        'tasks' => 'App\Entities\Projects\Task',
     ];
 
     public function index(Request $request, $fileableId)
@@ -49,12 +49,12 @@ class FilesController extends Controller
             $file = $this->proccessPhotoUpload($request->except('_token'), $fileableType, $fileableId);
 
             if ($file->exists) {
-                flash('Upload file berhasil.', 'success');
+                flash('Upload file successfully.', 'success');
             } else {
-                flash('Upload file gagal, coba kembali.', 'danger');
+                flash('Upload file failed.', 'danger');
             }
         } else {
-            flash('Upload file gagal, coba kembali.', 'danger');
+            flash('Upload file failed.', 'danger');
         }
 
         return back();

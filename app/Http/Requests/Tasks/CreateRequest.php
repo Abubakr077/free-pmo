@@ -26,8 +26,8 @@ class CreateRequest extends Request
     {
         return [
             'name'        => 'required|max:60',
-            'description' => 'nullable|max:255',
-            'progress'    => 'required|numeric|max:100',
+//            'description' => 'nullable|max:255',
+//            'progress'    => 'required|numeric|max:100',
         ];
     }
 }
