@@ -22,6 +22,7 @@
             <th class="text-center">{{ __('job.tasks_count') }}</th>
             <th class="text-center">{{ __('job.progress') }}</th>
             <th>{{ __('job.worker') }}</th>
+            <th>{{ __('Supervisor') }}</th>
             <th>{{ __('app.action') }}</th>
         </thead>
         <tbody>
@@ -43,8 +44,9 @@
                     @endif
                 </td>
                 <td class="text-center">{{ $job->tasks_count = $job->tasks->count() }}</td>
-                <td class="text-center">{{ format_decimal($job->progress) }} %</td>
+                <td class="text-center">{{ $job->progress }} %</td>
                 <td>{{ $job->worker->name }}</td>
+                <td>{{ $job->supervisor->name }}</td>
                 <td>
                     {{ link_to_route('jobs.show', __('app.show'), [$job], ['class' => 'btn btn-info btn-xs']) }}
                 </td>
@@ -57,8 +59,8 @@
             <tr>
                 <th class="text-right" colspan="3">{{ __('app.total') }}</th>
                 <th class="text-center">{{ $jobs->sum('tasks_count') }}</th>
-                <th class="text-center">{{ format_decimal($jobs->avg('progress')) }} %</th>
-                <th colspan="2"></th>
+                <th class="text-center">{{ $jobs->avg('progress') }} %</th>
+                <th colspan="3"></th>
             </tr>
         </tfoot>
     </table>

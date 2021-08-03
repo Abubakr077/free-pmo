@@ -13,9 +13,6 @@
                 {!! FormField::textarea('description', ['label' => __('job.description')]) !!}
                 <div class="row">
                     <div class="col-sm-4">
-                        {!! FormField::price('price', ['label' => __('job.price'), 'currency' => Option::get('money_sign', 'Rp')]) !!}
-                    </div>
-                    <div class="col-sm-4">
                         {!! FormField::select('worker_id', $workers, ['label' => __('job.worker')]) !!}
                     </div>
                     <div class="col-sm-4">

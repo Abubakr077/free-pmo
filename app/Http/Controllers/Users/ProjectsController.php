@@ -20,7 +20,6 @@ class ProjectsController extends Controller
                 $query->where('status_id', request('status', 2));
             })
             ->latest()
-            ->with(['customer'])
             ->paginate();
 
         return view('users.projects', compact('user', 'projects'));

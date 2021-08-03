@@ -40,7 +40,7 @@ function format_money($number)
  */
 function format_decimal($number)
 {
-    return number_format($number, 2, ',', '.');
+    return number_format($number, 2, '.', '.');
 }
 
 /**

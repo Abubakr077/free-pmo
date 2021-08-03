@@ -34,7 +34,7 @@ class ProjectsRepository extends BaseRepository
                     }
                 })
                 ->latest()
-                ->with(['customer', 'jobs'])
+                ->with([ 'jobs'])
                 ->paginate($this->_paginate);
         }
 
@@ -46,7 +46,6 @@ class ProjectsRepository extends BaseRepository
                     $query->where('status_id', $statusId);
                 }
             })
-            ->with('customer')
             ->paginate($this->_paginate);
     }
 

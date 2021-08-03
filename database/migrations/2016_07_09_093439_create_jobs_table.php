@@ -18,6 +18,7 @@ class CreateJobsTable extends Migration
             $table->string('name', 60);
             $table->string('description')->nullable();
             $table->integer('worker_id')->unsigned()->nullable();
+            $table->integer('supervisor_id')->unsigned()->nullable();
             $table->integer('price')->unsigned()->default(0);
             $table->boolean('type_id')->default(1)->comment('1: main, 2: additional');
             $table->unsignedTinyInteger('position')->default(0);

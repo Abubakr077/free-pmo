@@ -20,7 +20,7 @@ class TaskPolicy
      */
     public function create(User $user, Task $task)
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin') || $user->hasRole('supervisor');
     }
 
     /**
@@ -34,7 +34,26 @@ class TaskPolicy
     public function update(User $user, Task $task)
     {
         return $user->hasRole('admin')
-            || ($user->hasRole('worker')
+            || $user->hasRole('worker')
+            || $user->hasRole('supervisor')
+            || ($user->hasRole('student')
+                && $task->job->worker_id == $user->id);
+    }
+
+    public function updateStudent(User $user, Task $task)
+    {
+        return
+            $user->hasRole('admin')
+            || $user->hasRole('worker')
+            || ($user->hasRole('student')
+                && $task->job->worker_id == $user->id);
+    }
+    public function updateSupervisor(User $user, Task $task)
+    {
+        return
+            $user->hasRole('admin')
+            || $user->hasRole('worker')
+            || ($user->hasRole('supervisor')
                 && $task->job->worker_id == $user->id);
     }
 

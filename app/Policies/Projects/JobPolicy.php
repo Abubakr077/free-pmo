@@ -97,10 +97,7 @@ class JobPolicy
     public function viewComments(User $user, Job $job)
     {
         // Admin and job workers can commenting on their job.
-        return $user->hasRole('admin')
-            || ($user->hasRole('worker')
-                || $user->hasRole('supervisor')
-                && $job->worker_id == $user->id);
+        return true;
     }
 
     /**
@@ -113,6 +110,9 @@ class JobPolicy
     public function commentOn(User $user, Job $job)
     {
         // Admin and job workers can commenting on their job.
-        return $this->viewComments($user, $job);
+        return $user->hasRole('admin')
+            || ($user->hasRole('worker')
+                || $user->hasRole('supervisor')
+            );
     }
 }

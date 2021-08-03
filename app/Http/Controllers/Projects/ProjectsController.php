@@ -44,6 +44,7 @@ class ProjectsController extends Controller
 
         $projects = $this->repo->getProjects($request->get('q'), $statusId, auth()->user());
 
+
         return view('projects.index', compact('projects', 'status', 'statusId'));
     }
 

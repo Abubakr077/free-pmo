@@ -49,7 +49,9 @@
                 <td class="text-center">{{ $project->present()->status }}</td>
                 <td>
                     {!! html_link_to_route('projects.show', '', [$project->id], ['icon' => 'search', 'class' => 'btn btn-info btn-xs', 'title' => trans('app.show')]) !!}
+                    @can('update',$project)
                     {!! html_link_to_route('projects.edit', '', [$project->id], ['icon' => 'edit', 'class' => 'btn btn-warning btn-xs', 'title' => trans('app.edit')]) !!}
+                    @endcan
                 </td>
             </tr>
             @empty

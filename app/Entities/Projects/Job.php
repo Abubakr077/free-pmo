@@ -71,6 +71,10 @@ class Job extends Model
     {
         return $this->belongsTo(User::class, 'worker_id');
     }
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'supervisor_id');
+    }
 
     /**
      * Job has many Tasks relation ordered by position.

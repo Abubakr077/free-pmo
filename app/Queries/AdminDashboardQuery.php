@@ -108,7 +108,11 @@ class AdminDashboardQuery
         })->with($eagerLoads);
 
         if ($user->hasRole('admin') == false) {
-            $jobQuery->where('worker_id', $user->id);
+            if ($user->hasRole('supervisor')) {
+                $jobQuery->where('supervisor_id', $user->id);
+            }else{
+                $jobQuery->where('worker_id', $user->id);
+            }
         }
 
         if ($projectId) {

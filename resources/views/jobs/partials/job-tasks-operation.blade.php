@@ -17,7 +17,12 @@
     {{ Form::model($editableTask, ['route' => ['tasks.update', $editableTask], 'method' => 'patch']) }}
     <div class="panel-body">
         <div class="row">
+            @if(auth()->user()->hasRole('supervisor'))
             <div class="col-sm-6">{!! FormField::text('name') !!}</div>
+            @else
+                <div class="col-sm-6">{!! FormField::text('name',['readonly' => 'true']) !!}</div>
+            @endif
+            @can('updateSupervisor',$editableTask)
             <div class="col-md-4">
                 {{ Form::label('progress', __('task.progress'), ['class' => 'control-label']) }}
 
@@ -30,6 +35,7 @@
             <div class="col-md-2" style="font-size: 28px; margin-top: 15px;">
                 <strong id="ap_weight">{{ $editableTask->progress }}</strong>%
             </div>
+            @endcan
         </div>
         {!! FormField::textarea('description', ['label' => __('task.description')]) !!}
         <div class="row">
@@ -57,6 +63,7 @@
                 <th>{{ __('file.file') }}</th>
                 <th class="text-center">{{ __('file.updated_at') }}</th>
                 <th class="text-right">{{ __('file.size') }}</th>
+{{--                <th class="text-right">{{ __('Hash') }}</th>--}}
                 <th class="text-center">{{ __('file.download') }}</th>
                 </thead>
                 <tbody class="sort-files">
@@ -72,6 +79,7 @@
                                                 <div class="text-info small">{{ $file->getTime() }}</div>
                                             </td>
                                             <td class="text-right">{{ format_size_units($file->getSize()) }}</td>
+{{--                                            <td class="text-right">{{ $file->filename }}</td>--}}
                                             <td class="text-center">
                                                 {!! html_link_to_route('files.download', '', [$file->id], ['icon' => 'file', 'title' => __('file.download')]) !!}
                                             </td>
@@ -85,6 +93,7 @@
     </div>
     <div class="col-md-4">
 {{--        @if (Request::has('action') == false)--}}
+        @can('updateStudent',$editableTask)
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">{{ __('file.create') }}</h3></div>
                 <div class="panel-body">
@@ -97,6 +106,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+        @endcan
 {{--        @endif--}}
     </div>
 </div>

@@ -4,6 +4,7 @@ namespace App\Entities\Users;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -151,7 +152,12 @@ class User extends Authenticatable
      */
     public function jobs()
     {
-        return $this->hasMany('App\Entities\Projects\Job', 'worker_id');
+        if (auth()->user()->hasRole('supervisor')){
+            return $this->hasMany('App\Entities\Projects\Job', 'supervisor_id');
+        }
+        else{
+            return $this->hasMany('App\Entities\Projects\Job', 'worker_id');
+        }
     }
 
     /**
@@ -161,9 +167,15 @@ class User extends Authenticatable
      */
     public function projects()
     {
-        return $this->belongsToMany('App\Entities\Projects\Project', 'jobs', 'worker_id')
-            ->groupBy('worker_id')
+        if (auth()->user()->hasRole('supervisor')){
+        return $this->belongsToMany('App\Entities\Projects\Project', 'jobs', 'supervisor_id')
+            ->groupBy('supervisor_id')
             ->groupBy('project_id');
+        }else{
+            return $this->belongsToMany('App\Entities\Projects\Project', 'jobs', 'worker_id')
+                ->groupBy('worker_id')
+                ->groupBy('project_id');
+        }
     }
 
     /**

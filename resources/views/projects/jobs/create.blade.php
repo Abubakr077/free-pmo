@@ -26,6 +26,9 @@
                     <div class="col-sm-4">
                         {!! FormField::radios('type_id', [1 => __('job.main'), __('job.additional')], ['value' => 1, 'label' => __('job.type'), 'list_style' => 'unstyled']) !!}
                     </div>
+                    <div class="col-sm-4">
+                        {!! FormField::select('supervisor_id', $workers, ['label' => __('Supervisor'),'readonly'=>'true', 'value' =>  auth()->user()->id]) !!}
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">{!! FormField::text('target_start_date', ['label' => __('job.target_start_date'), 'class' => 'date-select']) !!}</div>
