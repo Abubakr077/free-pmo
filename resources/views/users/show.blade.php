@@ -20,6 +20,7 @@
                 <tr><th>{{ trans('user.email') }}</th><td>{{ $user->email }}</td></tr>
                 <tr><th>{{ trans('user.role') }}</th><td>{!! $user->roleList() !!}</td></tr>
                 <tr><th>{{ trans('lang.lang') }}</th><td>{{ trans('lang.'.$user->lang) }}</td></tr>
+                <tr><th>{{ trans('Status') }}</th><td>{{ trans('user.status.'.$user->is_approved) }}</td></tr>
             </table>
         </div>
     </div>

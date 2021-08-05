@@ -4,6 +4,6 @@ return [
     'lang'           => 'Language',
     'switch_tooltip' => 'Switch language to :lang',
     'en'             => 'English',
-    'id'             => 'Bahasa',
+    'id'             => 'Urdu',
     'de'             => 'German',
 ];

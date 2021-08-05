@@ -44,6 +44,8 @@ class User extends Authenticatable
         return $this->hasMany(UserRole::class);
     }
 
+
+
     /**
      * Assign the given role to the user.
      *

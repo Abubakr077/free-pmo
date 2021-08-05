@@ -16,10 +16,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password', 60);
+            $table->string('password', 60)->default('123456');
             $table->rememberToken();
             $table->string('api_token')->nullable();
             $table->char('lang', 2)->default('en');
+            $table->boolean('is_approved')->default(1)->comment('1: pending, 2: accepted, 3: rejected');
             $table->timestamps();
         });
     }

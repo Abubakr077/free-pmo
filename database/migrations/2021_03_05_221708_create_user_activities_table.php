@@ -22,7 +22,6 @@ class CreateUserActivitiesTable extends Migration
             $table->string('object_type', 60);
             $table->text('data')->nullable();
             $table->timestamps();
-            $table->boolean('is_approved')->default(1)->comment('1: pending, 2: accepted, 3: rejected');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('parent_id')->references('id')->on('user_activities')->onDelete('cascade');
         });

@@ -14,6 +14,7 @@
             {!! FormField::password('password', ['label' => false, 'placeholder'=> __('auth.password')]) !!}
             {{ Form::submit(__('auth.login'), ['class' => 'btn btn-success btn-block']) }}
             {{ link_to_route('auth.reset-request', __('auth.forgot_password'), [], ['class' => 'btn btn-link']) }}
+            {{ link_to_route('auth.request', __('Request Account'), [], ['class' => 'btn btn-link']) }}
             {{ Form::close() }}
         </div>
     </div>

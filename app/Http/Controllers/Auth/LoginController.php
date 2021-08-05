@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Entities\Users\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -35,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout','getUsers']);
     }
 
     /**
@@ -57,6 +59,14 @@ class LoginController extends Controller
                 ?: redirect()->intended($this->redirectPath());
     }
 
+    public function doLogin(Request $request)
+    {
+        $user = User::where('email',$request->email) -> first();
+        if ($user->is_approved != 1){
+            return $this->login($request);
+        }
+    }
+
     /**
      * Log the user out of the application.
      *
@@ -75,4 +85,44 @@ class LoginController extends Controller
 
         return redirect(route('auth.login'));
     }
+
+    public function request(){
+        return view('auth.request-account');
+
+    }
+
+    public function requestStore(Request $request)
+    {
+
+        $userData = $request->validate([
+            'name'     => 'required|min:5',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'nullable|between:6,15',
+            'role'     => 'required|array',
+        ]);
+
+        if ($userData['password']) {
+            $userData['password'] = bcrypt($userData['password']);
+        } else {
+            $userData['password'] = bcrypt(\Option::get('password_default', 'member'));
+        }
+
+        $userData['api_token'] = Str::random(32);
+
+        $user = User::create($userData);
+
+        $rolesData = array_map(function ($roleId) use ($user) {
+            return [
+                'user_id' => $user->id,
+                'role_id' => $roleId,
+            ];
+        }, $userData['role']);
+
+        \DB::table('user_roles')->insert($rolesData);
+
+        flash(trans('user.created'), 'success');
+
+        return redirect()->route('users.index');
+    }
+
 }

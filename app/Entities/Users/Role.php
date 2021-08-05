@@ -57,4 +57,18 @@ class Role extends ReferenceAbstract
 
         return $lists;
     }
+
+    public static function guestArray()
+    {
+        $lists = [];
+        foreach (static::$lists as $key => $value) {
+            if ($key == 1 || $key==2)
+                continue;
+            else
+            $lists[$key] = trans('user.roles.'.$value);
+        }
+
+        return $lists;
+    }
+
 }

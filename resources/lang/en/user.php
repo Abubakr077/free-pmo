@@ -41,6 +41,11 @@ return [
         'supervisor' => 'Supervisor',
         'student' => 'Student',
     ],
+    'status' => [
+        '1'  => 'Pending',
+        '2' => 'Approved',
+        '3' => 'Rejected',
+    ],
 
     // Relations
     'jobs'       => 'Job List',

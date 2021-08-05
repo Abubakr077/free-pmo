@@ -11,6 +11,11 @@ Route::group(['middleware' => 'web'], function () {
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
+Route::get('request-account', 'Auth\LoginController@request')->name('auth.request');
+Route::post('store-account', 'Auth\LoginController@requestStore')->name('auth.store-account');
+Route::get('pending', 'Users\UsersController@getUsers')->name('auth.pending-users');
+Route::get('approve/{user}', 'Users\UsersController@approvePending')->name('update.pending-users');
+
 
 // Change Password Routes...
 Route::get('change-password', 'Auth\ChangePasswordController@show')->name('auth.change-password');

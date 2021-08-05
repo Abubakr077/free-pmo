@@ -24,6 +24,15 @@ class UsersController extends Controller
         return view('users.index', compact('users'));
     }
 
+    public function getUsers(){
+
+        $users = User::where('is_approved', 1)
+            ->with('roles')
+            ->paginate(25);
+        return view('users.index', compact('users'));
+
+    }
+
     public function create()
     {
         return view('users.create');
@@ -31,6 +40,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+
         $userData = $request->validate([
             'name'     => 'required|min:5',
             'email'    => 'required|email|unique:users,email',
@@ -81,6 +91,18 @@ class UsersController extends Controller
         return view('users.edit', compact('user', 'langList'));
     }
 
+
+    public function approvePending(Request $request, User $user)
+    {
+        $this->authorize('update', $user);
+
+        $user->is_approved = 2;
+        $user->save();
+
+        flash(trans('user.updated'), 'success');
+
+        return redirect()->route('users.show', $user->id);
+    }
     public function update(Request $request, User $user)
     {
         $this->authorize('update', $user);
