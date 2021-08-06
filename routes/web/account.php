@@ -9,7 +9,7 @@ Route::group(['middleware' => 'web'], function () {
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@doLogin');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 Route::get('request-account', 'Auth\LoginController@request')->name('auth.request');
 Route::post('store-account', 'Auth\LoginController@requestStore')->name('auth.store-account');

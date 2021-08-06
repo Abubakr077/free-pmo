@@ -20,7 +20,7 @@ return [
     'receiveable_earnings' => 'Receiveable Earning',
     'payment_remaining'    => 'Payment Remaining',
     'earnings_calculation' => 'Earnings Calculation',
-    'additional_jobs'      => 'Additional Job List',
+    'additional_jobs'      => 'Additional Milestone List',
     'overall_progress'     => 'Overall Progress',
 
     // Payments
@@ -42,13 +42,13 @@ return [
     'delete'        => 'Delete Project',
     'deleted'       => 'Project has been deleted.',
     'undeleted'     => 'Project not deleted.',
-    'show_jobs'     => 'Show Job',
+    'show_jobs'     => 'Show Milestone',
     'update_status' => 'Update Project Status',
 
     'jobs_list_export_html'     => 'Export HTML',
     'jobs_export_excel'         => 'Export Excel',
     'jobs_progress_export_html' => 'Export Progress',
-    'sort_jobs'                 => 'Sort Job Priority',
+    'sort_jobs'                 => 'Sort Milestone Priority',
 
     // Attributes
     'name'           => 'Project Name',
@@ -63,8 +63,8 @@ return [
 
     // Relations
     'files'         => 'Document List',
-    'jobs'          => 'Job List',
-    'no_jobs'       => 'Job list is empty.',
+    'jobs'          => 'Milestone List',
+    'no_jobs'       => 'Milestone list is empty.',
     'cost_proposal' => 'Cost Proposal',
     'invoices'      => 'Invoice List',
     'customer'      => 'Supervisor',

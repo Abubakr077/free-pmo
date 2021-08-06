@@ -21,14 +21,12 @@
                 {!! FormField::textarea('description', ['label' => __('job.description')]) !!}
                 <div class="row">
                     <div class="col-sm-4">
-                        {!! FormField::select('worker_id', $workers, ['label' => __('job.worker'), 'value' => 1]) !!}
+                        {!! FormField::select('worker_id', $workers, ['label' => __('Student'), 'value' => 1]) !!}
                     </div>
                     <div class="col-sm-4">
                         {!! FormField::radios('type_id', [1 => __('job.main'), __('job.additional')], ['value' => 1, 'label' => __('job.type'), 'list_style' => 'unstyled']) !!}
                     </div>
-                    <div class="col-sm-4">
-                        {!! FormField::select('supervisor_id', $workers, ['label' => __('Supervisor'),'readonly'=>'true', 'value' =>  auth()->user()->id]) !!}
-                    </div>
+                    {{ Form::hidden('supervisor_id', auth()->user()->id) }}
                 </div>
                 <div class="row">
                     <div class="col-md-4">{!! FormField::text('target_start_date', ['label' => __('job.target_start_date'), 'class' => 'date-select']) !!}</div>

@@ -64,6 +64,9 @@ class LoginController extends Controller
         $user = User::where('email',$request->email) -> first();
         if ($user->is_approved != 1){
             return $this->login($request);
+        }else{
+            flash(trans('User not approved'), 'danger');
+            return redirect(route('auth.login'));
         }
     }
 
@@ -122,7 +125,7 @@ class LoginController extends Controller
 
         flash(trans('user.created'), 'success');
 
-        return redirect()->route('users.index');
+        return redirect(route('auth.login'));
     }
 
 }

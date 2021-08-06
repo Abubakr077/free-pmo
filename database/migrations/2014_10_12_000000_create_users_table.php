@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('api_token')->nullable();
             $table->char('lang', 2)->default('en');
-            $table->boolean('is_approved')->default(1)->comment('1: pending, 2: accepted, 3: rejected');
+            $table->boolean('is_approved')->default(2)->comment('1: pending, 2: accepted, 3: rejected');
             $table->timestamps();
         });
     }

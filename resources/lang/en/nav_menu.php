@@ -2,7 +2,7 @@
 
 return [
     'dashboard' => 'Dashboard',
-    'agency'    => 'Agency Profile',
+    'agency'    => 'Organization Profile',
     'calendar'  => 'Calendar',
     'nav'       => 'Backup/Restore DB',
 ];

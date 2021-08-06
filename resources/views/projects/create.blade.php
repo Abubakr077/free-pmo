@@ -20,7 +20,7 @@
                         {!! FormField::text('proposal_date', ['label' => trans('project.proposal_date')]) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! FormField::text('proposal_value', ['label' => 'Modules']) !!}
+                        {!! FormField::text('proposal_value', ['label' => 'Milestones']) !!}
                     </div>
                 </div>
                 {!! FormField::textarea('description', ['label' => trans('project.description')]) !!}

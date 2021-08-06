@@ -16,7 +16,7 @@
                             {!! FormField::text('name', ['label' => __('app.name')]) !!}
                             {!! FormField::email('email', ['label' => __('user.email')]) !!}
                             {!! FormField::checkboxes('role', $roles::guestArray(), ['label' => __('user.role')]) !!}
-
+                            {{ Form::hidden('is_accepted', 1) }}
                             {!! FormField::password('password', [
                                 'label' => __('auth.password'),
                                 'info' => [

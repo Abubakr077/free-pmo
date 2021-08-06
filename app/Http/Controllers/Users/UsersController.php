@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $query = $request->get('q');
-        $users = User::where('name', 'like', '%'.$query.'%')
+        $users = User::where([['name', 'like', '%'.$query.'%'],['is_approved',2]])
             ->with('roles')
             ->paginate(25);
 
@@ -91,7 +91,6 @@ class UsersController extends Controller
         return view('users.edit', compact('user', 'langList'));
     }
 
-
     public function approvePending(Request $request, User $user)
     {
         $this->authorize('update', $user);
@@ -101,7 +100,7 @@ class UsersController extends Controller
 
         flash(trans('user.updated'), 'success');
 
-        return redirect()->route('users.show', $user->id);
+        return redirect(route('users.show', $user->id));
     }
     public function update(Request $request, User $user)
     {
