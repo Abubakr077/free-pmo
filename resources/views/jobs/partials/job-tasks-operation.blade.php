@@ -2,16 +2,16 @@
 @can('update', $editableTask)
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="pull-right" style="margin-top: -2px;margin-right: -8px">
-            {!! FormField::formButton(
-                [
-                    'route' => ['tasks.set-as-job', $editableTask],
-                    'onsubmit' => __('task.set_as_job_confirm'),
-                ],
-                __('task.set_as_job'),
-                ['class' => 'btn btn-success btn-xs', 'id' => 'set-as-job-'.$editableTask->id]
-            ) !!}
-        </div>
+{{--        <div class="pull-right" style="margin-top: -2px;margin-right: -8px">--}}
+{{--            {!! FormField::formButton(--}}
+{{--                [--}}
+{{--                    'route' => ['tasks.set-as-job', $editableTask],--}}
+{{--                    'onsubmit' => __('task.set_as_job_confirm'),--}}
+{{--                ],--}}
+{{--                __('task.set_as_job'),--}}
+{{--                ['class' => 'btn btn-success btn-xs', 'id' => 'set-as-job-'.$editableTask->id]--}}
+{{--            ) !!}--}}
+{{--        </div>--}}
         <h3 class="panel-title">{{ __('task.edit') }}</h3>
     </div>
     {{ Form::model($editableTask, ['route' => ['tasks.update', $editableTask], 'method' => 'patch']) }}
@@ -43,6 +43,32 @@
 {{--                {!! FormField::select('job_id', $job->project->jobs->pluck('name', 'id'), ['label' => __('task.move_to_other_job')]) !!}--}}
             </div>
             <div class="col-md-6 text-right"><br>
+
+                @can('updateSupervisor',$editableTask)
+                    @if ($editableTask->progress < 100)
+                        {!! FormField::formButton(['route' => ['tasks.set_reject', $editableTask], 'method' => 'patch'],
+                            __('Reject'),
+                            ['class' => 'btn btn-danger btn-primary', 'id' => $editableTask->id.'-set_task_reject'],
+                            [
+                                'task_id' => $editableTask->id,
+                                'job_id' => $editableTask->job_id,
+                            ]
+                        ) !!}
+                    @endif
+                @endcan
+
+                @can('updateSupervisor',$editableTask)
+                    @if ($editableTask->progress < 100)
+                        {!! FormField::formButton(['route' => ['tasks.set_done', $editableTask], 'method' => 'patch'],
+                            __('Set Done'),
+                            ['class' => 'btn btn-success btn-primary', 'id' => $editableTask->id.'-set_task_done'],
+                            [
+                                'task_id' => $editableTask->id,
+                                'job_id' => $editableTask->job_id,
+                            ]
+                        ) !!}
+                    @endif
+                @endcan
                 {{ Form::submit(__('task.update'), ['class' => 'btn btn-warning']) }}
                 {{ link_to_route('jobs.show', __('app.cancel'), [$job], ['class' => 'btn btn-default']) }}
             </div>
@@ -62,7 +88,7 @@
                 <th>{{ __('app.table_no') }}</th>
                 <th>{{ __('file.file') }}</th>
                 <th class="text-center">{{ __('file.updated_at') }}</th>
-                <th class="text-right">{{ __('file.size') }}</th>
+                <th class="text-right">{{ __('Hash') }}</th>
 {{--                <th class="text-right">{{ __('Hash') }}</th>--}}
                 <th class="text-center">{{ __('file.download') }}</th>
                 </thead>
@@ -78,7 +104,7 @@
                                                 <div class="">{{ $file->getDate() }}</div>
                                                 <div class="text-info small">{{ $file->getTime() }}</div>
                                             </td>
-                                            <td class="text-right">{{ format_size_units($file->getSize()) }}</td>
+                                            <td class="text-right">{{ $file->filename }}</td>
 {{--                                            <td class="text-right">{{ $file->filename }}</td>--}}
                                             <td class="text-center">
                                                 {!! html_link_to_route('files.download', '', [$file->id], ['icon' => 'file', 'title' => __('file.download')]) !!}

@@ -53,8 +53,7 @@ class TaskPolicy
         return
             $user->hasRole('admin')
             || $user->hasRole('worker')
-            || ($user->hasRole('supervisor')
-                && $task->job->worker_id == $user->id);
+            || ($user->hasRole('supervisor'));
     }
 
     /**

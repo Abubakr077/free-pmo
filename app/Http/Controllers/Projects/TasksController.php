@@ -44,6 +44,7 @@ class TasksController extends Controller
      */
     public function update(UpdateRequest $request, Task $task)
     {
+        dd('ddddddddd');
         $task->update($request->validated());
 
         flash(trans('task.updated'), 'success');
@@ -99,10 +100,24 @@ class TasksController extends Controller
     public function setDone(Task $task)
     {
         $task->progress = 100;
+        $task->status_id = 2;
+
         $task->save();
 
         flash(__('task.updated'), 'success');
 
         return redirect()->route('jobs.show', $task->job);
     }
+
+    public function setReject(Task $task)
+    {
+        dd('here');
+        $task->status_id = 3;
+
+        $task->save();
+
+        flash(__('task.updated'), 'success');
+        return redirect()->route('jobs.show', $task->job);
+    }
+
 }

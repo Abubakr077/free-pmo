@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'api_token', 'lang'];
+    protected $fillable = ['name', 'email', 'password', 'api_token', 'lang', 'is_approved'];
 
     /**
      * The attributes that should be hidden for serialization.

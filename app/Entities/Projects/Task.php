@@ -4,6 +4,8 @@ namespace App\Entities\Projects;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Task extends Model
 {
     /**
@@ -17,6 +19,8 @@ class Task extends Model
         'deleted' => 'App\Events\Tasks\Deleted',
     ];
 
+
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $touches = ['job'];
@@ -29,5 +33,15 @@ class Task extends Model
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function getStatus()
+    {
+        $STATUSES = [
+            1 => 'Pending',
+            2 => 'Accepted',
+            3 => 'Rejected',
+        ];
+        return $STATUSES[$this->status_id];
     }
 }

@@ -19,8 +19,8 @@
     <table class="table table-condensed">
         <thead>
             <th class="col-md-1 text-center">{{ __('app.table_no') }}</th>
-            <th class="col-md-6">{{ __('task.name') }}</th>
-            <th class="col-md-6">{{ __('Status') }}</th>
+            <th class="col-md-4">{{ __('task.name') }}</th>
+            <th class="col-md-2 text-center">{{ __('Status') }}</th>
             <th class="text-center col-md-1">{{ __('task.progress') }}</th>
             <th class="col-md-2 text-center">{{ __('app.action') }}</th>
         </thead>
@@ -32,7 +32,8 @@
                     <div>{{ $task->name }}</div>
                     <div class="small text-info">{!! nl2br($task->description) !!}</div>
                 </td>
-                <td class="text-center">{{ $task->present()->status }}</td>
+                <td class="text-center">{{ $task->getStatus() }}</td>
+{{--                <td class="text-center">{{ '$task' }}</td>--}}
                 <td class="text-center">
                     {{ $task->progress }} %
 

@@ -101,7 +101,8 @@ class FilesController extends Controller
     private function proccessPhotoUpload($data, $fileableType, $fileableId)
     {
         $file = $data['file'];
-        $fileName = $file->hashName();
+//        $fileName = $file->hashName();
+        $fileName = hash_hmac('sha1', $file, env('APP_KEY'));
 
         $fileData['fileable_id'] = $fileableId;
         $fileData['fileable_type'] = $fileableType;

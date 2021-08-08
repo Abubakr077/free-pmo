@@ -62,12 +62,15 @@ class LoginController extends Controller
     public function doLogin(Request $request)
     {
         $user = User::where('email',$request->email) -> first();
-        if ($user->is_approved != 1){
-            return $this->login($request);
-        }else{
-            flash(trans('User not approved'), 'danger');
-            return redirect(route('auth.login'));
+        if ($user) {
+            if ($user->is_approved != 1) {
+                return $this->login($request);
+            } else {
+                flash(trans('User not approved'), 'danger');
+                return redirect(route('auth.login'));
+            }
         }
+        return $this->login($request);
     }
 
     /**
@@ -111,6 +114,7 @@ class LoginController extends Controller
         }
 
         $userData['api_token'] = Str::random(32);
+        $userData['is_approved'] = 1;
 
         $user = User::create($userData);
 
@@ -125,7 +129,7 @@ class LoginController extends Controller
 
         flash(trans('user.created'), 'success');
 
-        return redirect(route('auth.login'));
+        return back();
     }
 
 }

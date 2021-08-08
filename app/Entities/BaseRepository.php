@@ -35,6 +35,12 @@ abstract class BaseRepository extends EloquentRepository
         return User::orderBy('name')->pluck('name', 'id');
     }
 
+    public function getStudentsList()
+    {
+        return User::where('is_active', 1)
+            ->orderBy('name')
+            ->pluck('name', 'id');
+    }
     /**
      * Get Job by it's id.
      *

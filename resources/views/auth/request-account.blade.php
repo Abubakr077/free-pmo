@@ -16,7 +16,8 @@
                             {!! FormField::text('name', ['label' => __('app.name')]) !!}
                             {!! FormField::email('email', ['label' => __('user.email')]) !!}
                             {!! FormField::checkboxes('role', $roles::guestArray(), ['label' => __('user.role')]) !!}
-                            {{ Form::hidden('is_accepted', 1) }}
+{{--                            {{ Form::hidden('is_approved', 1) }}--}}
+
                             {!! FormField::password('password', [
                                 'label' => __('auth.password'),
                                 'info' => [
@@ -27,6 +28,8 @@
                         </div>
                         <div class="panel-footer">
                             {!! Form::submit(__('user.create'), ['class'=>'btn btn-primary']) !!}
+
+                            {!! link_to_route('auth.login', __('Login'), [], ['class'=>'btn btn-primary btn-success']) !!}
                             {!! link_to_route('users.index', __('app.cancel'), [], ['class'=>'btn btn-default']) !!}
                         </div>
                     </div>
