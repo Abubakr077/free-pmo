@@ -54,11 +54,6 @@
                                 'job_id' => $editableTask->job_id,
                             ]
                         ) !!}
-                    @endif
-                @endcan
-
-                @can('updateSupervisor',$editableTask)
-                    @if ($editableTask->progress < 100)
                         {!! FormField::formButton(['route' => ['tasks.set_done', $editableTask], 'method' => 'patch'],
                             __('Set Done'),
                             ['class' => 'btn btn-success btn-primary', 'id' => $editableTask->id.'-set_task_done'],

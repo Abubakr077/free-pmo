@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,49 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout','getUsers']);
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Google.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->stateless()->user();
+        } catch (\Exception $e) {
+            return $e;
+            flash(trans('Cannot login at this moment'), 'warning');
+            return redirect(route('auth.login'));
+
+        }
+        // only allow people with @company.com to login
+        if(explode("@", $user->email)[1] !== '.edu.pk'){
+            flash(trans('Only educational emails accepted'), 'warning');
+            return redirect(route('auth.login'));
+        }
+        // check if they're an existing user
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser){
+            // log them in
+            auth()->login($existingUser, true);
+        } else {
+            // create a new user
+            $newUser                  = new User;
+            $newUser->name            = $user->name;
+            $newUser->email           = $user->email;
+            $newUser->avatar          = $user->avatar;
+            $newUser->is_approved     = 1;
+            $newUser->save();
+            auth()->login($newUser, true);
+        }
+        return redirect(route('home'));
     }
 
     /**

@@ -44,7 +44,6 @@ class TasksController extends Controller
      */
     public function update(UpdateRequest $request, Task $task)
     {
-        dd('ddddddddd');
         $task->update($request->validated());
 
         flash(trans('task.updated'), 'success');

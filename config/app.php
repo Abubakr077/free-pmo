@@ -173,6 +173,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -227,6 +229,8 @@ return [
         'ProjectStatus'    => App\Entities\Projects\Status::class,
         'AdminDashboard'   => Facades\App\Queries\AdminDashboardQuery::class,
         'Option'           => Facades\App\Services\Option::class,
+
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

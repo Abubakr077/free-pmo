@@ -7,6 +7,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('app-install', ['as' => 'app.install', 'uses' => 'InstallationController@store']);
 });
 
+// login with google
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('auth.google');;
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback')->name('auth.callback');;
+
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('login', 'Auth\LoginController@doLogin');
