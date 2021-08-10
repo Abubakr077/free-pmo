@@ -56,7 +56,7 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
-            return $e;
+//            return $e;
             flash(trans('Cannot login at this moment'), 'warning');
             return redirect(route('auth.login'));
 
