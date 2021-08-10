@@ -12,8 +12,11 @@
     <li class="{{ Request::segment(3) == 'jobs' ? 'active' : '' }}">
         {!! link_to_route('projects.jobs.index', __('project.jobs').' ('.$project->jobs->count().')', $project) !!}
     </li>
-    <li class="{{ Request::segment(3) == 'issues' ? 'active' : '' }}">
-        {!! link_to_route('projects.issues.index', __('project.issues').' ('.$project->issues->count().')', $project) !!}
+{{--    <li class="{{ Request::segment(3) == 'issues' ? 'active' : '' }}">--}}
+{{--        {!! link_to_route('projects.issues.index', __('project.issues').' ('.$project->issues->count().')', $project) !!}--}}
+{{--    </li>--}}
+    <li class="{{ Request::segment(3) == 'invites' ? 'active' : '' }}">
+        {!! link_to_route('projects.invites.index', __('project.invites').' ('.$project->invites->count().')', $project) !!}
     </li>
     @can('view-comments', $project)
     <li class="{{ Request::segment(3) == 'comments' ? 'active' : '' }}">

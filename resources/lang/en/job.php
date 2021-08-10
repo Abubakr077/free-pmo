@@ -4,7 +4,7 @@ return [
     // Labels
     'job'           => 'Milestone',
     'list'          => 'Milestone List',
-    'on_progress'   => 'In Progress',
+    'on_progress'   => 'In Progress M.S',
     'detail'        => 'Milestone Detail',
     'search'        => 'Ssearch Milestone',
     'found'         => 'Milestone found.',

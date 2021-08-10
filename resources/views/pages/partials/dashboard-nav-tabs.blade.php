@@ -14,7 +14,7 @@
             {!! link_to_route('users.index', trans('user.list')) !!}
         </li>
         <li class="{{ Request::segment(1) == 'pending' ? 'active' : '' }}">
-            {!! link_to_route('auth.pending-users', trans('Pending Users')) !!}
+            {!! link_to_route('auth.pending-users', 'Pending Users') !!}
         </li>
 {{--        <li class="{{ Request::segment(1) == 'bank-accounts' ? 'active' : '' }}">--}}
 {{--            {!! link_to_route('bank-accounts.index', trans('bank_account.list')) !!}--}}
@@ -22,6 +22,11 @@
 {{--        <li class="{{ Request::segment(1) == 'site-options' ? 'active' : '' }}">--}}
 {{--            {!! link_to_route('site-options.page-1', trans('option.list')) !!}--}}
 {{--        </li>--}}
+    @endcan
+    @if (!auth()->user()->hasRole('student'))
+        <li class="{{ Request::segment(1) == 'invites' ? 'active' : '' }}">
+            {!! link_to_route('auth.pending-invites', 'Pending Invites') !!}
+        </li>
     @endcan
 </ul>
 <br>

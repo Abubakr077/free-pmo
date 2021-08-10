@@ -73,6 +73,7 @@ return [
     'status'        => 'Project Status',
     'payments'      => 'Payments',
     'issues'        => 'Issues',
+    'invites'        => 'Invites',
     'activities'    => 'Activities',
 
     // Statuses

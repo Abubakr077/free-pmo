@@ -5,7 +5,9 @@ namespace App\Entities\Projects;
 use App\Entities\BaseRepository;
 use App\Entities\Partners\Customer;
 use App\Entities\Users\User;
+use App\Entities\Users\UserProject;
 use DB;
+use Illuminate\Support\Str;
 use ProjectStatus;
 
 /**
@@ -25,7 +27,7 @@ class ProjectsRepository extends BaseRepository
         $statusIds = array_keys(ProjectStatus::toArray());
 
         if ($user->hasRole('admin') == false) {
-            return $user->projects()
+            $projects = $user->projects()
                 ->where(function ($query) use ($q, $statusId, $statusIds) {
                     $query->where('projects.name', 'like', '%'.$q.'%');
 
@@ -36,6 +38,20 @@ class ProjectsRepository extends BaseRepository
                 ->latest()
                 ->with([ 'jobs'])
                 ->paginate($this->_paginate);
+            if ($projects->isEmpty()){
+                $projects = Project::where('user_id',$user->id)
+                    ->where(function ($query) use ($q, $statusId, $statusIds) {
+                        $query->where('projects.name', 'like', '%'.$q.'%');
+
+                        if ($statusId && in_array($statusId, $statusIds)) {
+                            $query->where('status_id', $statusId);
+                        }
+                    })
+                    ->latest()
+                    ->with([ 'jobs'])
+                    ->paginate($this->_paginate);
+            }
+            return $projects;
         }
 
         return $this->model->latest()
@@ -52,7 +68,9 @@ class ProjectsRepository extends BaseRepository
     public function create($projectData)
     {
 
-        $projectData['project_value'] =  0;
+        $user_id = auth()->user()->id;;
+        $projectData['user_id'] =  $user_id;
+
 //        $projectData['customer_id'] = $projectData['supervisor_id'];
 //        $projectData['customer_name'] = $projectData['supervisor_name'];
 //        $projectData['customer_email'] = $projectData['supervisor_email'];
@@ -67,6 +85,12 @@ class ProjectsRepository extends BaseRepository
 
         $project = $this->storeArray($projectData);
         DB::commit();
+
+
+        UserProject::create([
+            'user_id' => $user_id,
+            'project_id' => $project->id
+        ]);
 
         return $project;
     }

@@ -31,7 +31,7 @@ class JobsController extends Controller
 
     public function create(Project $project)
     {
-        $workers = $this->repo->getWorkersList();
+        $workers = $this->repo->getStudentsList();
 
         return view('projects.jobs.create', compact('project', 'workers'));
     }

@@ -62,6 +62,20 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Projects'], function () 
     Route::delete('projects/{project}/issues/{issue}', 'IssueController@destroy')->name('projects.issues.destroy');
 
     /*
+ * Project invites Routes
+ */
+    Route::get('projects/{project}/invites', 'InviteController@index')->name('projects.invites.index');
+    Route::get('projects/{project}/invites/create', 'InviteController@create')->name('projects.invites.create');
+    Route::post('projects/{project}/invites', 'InviteController@store')->name('projects.invites.store');
+    Route::get('projects/{project}/invites/{issue}', 'InviteController@show')->name('projects.invites.show');
+    Route::get('projects/{project}/invites/{issue}/edit', 'InviteController@edit')->name('projects.invites.edit');
+    Route::get('projects/invites/{invite}/accept', 'InviteController@accept')->name('projects.invites.accept');
+    Route::get('projects/invites/{invite}/reject', 'InviteController@reject')->name('projects.invites.reject');
+    Route::patch('projects/{project}/invites/{issue}', 'InviteController@update')->name('projects.invites.update');
+    Route::delete('projects/{project}/invites/{issue}', 'InviteController@destroy')->name('projects.invites.destroy');
+
+
+    /*
      * Tasks Routes
      */
     Route::get('jobs/{job}/tasks/create', ['as' => 'tasks.create', 'uses' => 'TasksController@create']);
@@ -119,3 +133,9 @@ Route::patch('issues/{issue}/options', 'Issues\OptionController@update')->name('
 Route::post('issues/{issue}/comments', 'Issues\CommentController@store')->name('issues.comments.store');
 Route::patch('issues/{issue}/comments/{comment}', 'Issues\CommentController@update')->name('issues.comments.update');
 Route::delete('issues/{issue}/comments/{comment}', 'Issues\CommentController@destroy')->name('issues.comments.destroy');
+
+/*
+ * Invite Options Routes
+ */
+//Route::patch('invite/{invite}/options', 'Issues\OptionController@update')->name('issues.options.update');
+

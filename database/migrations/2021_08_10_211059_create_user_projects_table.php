@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersProjectsTable extends Migration
+class CreateUserProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class CreateUsersProjectsTable extends Migration
         Schema::create('user_projects', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->unsignedTinyInteger('project_id');
-
             $table->unique(['user_id', 'project_id'], 'user_project_unique');
+            $table->timestamps();
         });
     }
 

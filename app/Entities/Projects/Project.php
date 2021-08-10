@@ -283,4 +283,15 @@ class Project extends Model
     {
         return $this->hasMany(Issue::class);
     }
+
+    /**
+     * Project has many Invites relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function invites()
+    {
+        return $this->hasMany(Invite::class);
+    }
+
 }

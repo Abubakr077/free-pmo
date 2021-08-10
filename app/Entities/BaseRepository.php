@@ -37,10 +37,20 @@ abstract class BaseRepository extends EloquentRepository
 
     public function getStudentsList()
     {
-        return User::where('is_active', 1)
-            ->orderBy('name')
+        return User::whereHas('roles', function ($query) {
+            return $query->whereIn('role_id', [4]);
+        })->orderBy('name')
             ->pluck('name', 'id');
     }
+
+    public function getSupervisorsList()
+    {
+        return User::whereHas('roles', function ($query) {
+            return $query->whereIn('role_id', [3]);
+        })->orderBy('name')
+            ->pluck('name', 'id');
+    }
+
     /**
      * Get Job by it's id.
      *

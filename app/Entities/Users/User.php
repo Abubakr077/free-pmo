@@ -162,6 +162,9 @@ class User extends Authenticatable
         }
     }
 
+    public function invites(){
+        return $this->hasMany('App\Entities\Projects\Invite', 'supervisor_id');
+    }
     /**
      * User belongs to many Projects based on Job assignments.
      *

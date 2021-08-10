@@ -51,6 +51,11 @@ class JobsController extends Controller
             $projects = $user->projects()
                 ->whereIn('status_id', [2, 3])
                 ->pluck('projects.name', 'projects.id');
+//            if ($projects->isEmpty()){
+//                $projects = Project::where([['user_id',$user->id]])
+//                    ->whereIn('status_id', [2, 3])
+//                    ->pluck('projects.name', 'projects.id');
+//            }
         }
 
         $jobs = $this->repo->getUnfinishedJobs($user, request('project_id'));
