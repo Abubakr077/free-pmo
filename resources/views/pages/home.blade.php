@@ -3,7 +3,7 @@
 @section('title', __('nav_menu.dashboard'))
 
 @section('content-dashboard')
-@if (auth()->user()->hasRole('admin'))
+@if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('supervisor'))
 <div class="row">
     <div class="col-lg-5">
         <legend style="border-bottom: none" class="text-center">{{ __('dashboard.project_status_stats') }}</legend>

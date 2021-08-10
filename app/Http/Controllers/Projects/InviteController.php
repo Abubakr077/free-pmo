@@ -8,6 +8,7 @@ use App\Entities\Projects\Project;
 use App\Entities\Users\User;
 use App\Entities\Projects\Invite;
 
+use App\Entities\Users\UserProject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -70,6 +71,7 @@ class InviteController extends Controller
         Invite::create([
             'project_id'  => $project->id,
             'supervisor_id'  => $issueData['supervisor_id'],
+            'owner_id'  => auth()->user()->id,
             'message'        => $issueData['message'],
         ]);
         flash(__('invite.created'), 'success');
@@ -114,7 +116,10 @@ class InviteController extends Controller
     {
         $invite->status_id = 2;
         $invite->save();
-        // todo update project here
+        UserProject::create([
+            'user_id' => $invite->supervisor_id,
+            'project_id' => $invite->project_id
+        ]);
 
         flash(__('invite.updated'), 'success');
 

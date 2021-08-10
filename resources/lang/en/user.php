@@ -6,8 +6,7 @@ return [
     'list'          => 'User List',
     'user_id'       => 'User ID',
     'profile'       => 'Profile',
-    'current_jobs'  => 'Current Jobs',
-    'search'        => 'Search User: ketik nama',
+    'current_jobs'  => 'Current Milestones',
     'search'        => 'Type user name then hit Enter..',
     'found'         => 'User found.',
     'not_found'     => 'User not found.',
@@ -48,8 +47,8 @@ return [
     ],
 
     // Relations
-    'jobs'       => 'Job List',
-    'jobs_count' => 'Job Count',
+    'jobs'       => 'Milestone List',
+    'jobs_count' => 'Milestone Count',
     'projects'   => 'Project List',
 
     'create_password_info' => 'Leave it empty if you want to use the <b>default password</b>.',

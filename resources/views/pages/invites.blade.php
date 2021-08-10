@@ -12,7 +12,7 @@
             <table class="table table-condensed table-striped">
                 <thead>
                 <th>{{ __('app.table_no') }}</th>
-                <th>{{ __('Supervisor') }}</th>
+                <th>{{ __('Owner') }}</th>
                 <th>{{ __('invite.message') }}</th>
                 <th>{{ __('app.status') }}</th>
                 <th>{{ __('app.last_update') }}</th>
@@ -26,7 +26,7 @@
                     @endphp
                     <tr id="{{ $issue->id }}">
                         <td>{{ $no }}</td>
-                        <td>{{ $issue->supervisor() }}</td>
+                        <td>{{ $issue->owner() }}</td>
                         <td>{{ $issue->message }}</td>
                         <td>{!! $issue->getStatus() !!}</td>
                         <td>{{ $issue->updated_at->diffForHumans() }}</td>

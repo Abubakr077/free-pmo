@@ -171,7 +171,7 @@ class LoginController extends Controller
 
         \DB::table('user_roles')->insert($rolesData);
 
-        flash(trans('user.created'), 'success');
+        flash(trans('User Request Completed'), 'success');
 
         return back();
     }

@@ -46,6 +46,7 @@ class User extends Authenticatable
 
 
 
+
     /**
      * Assign the given role to the user.
      *
@@ -172,10 +173,10 @@ class User extends Authenticatable
      */
     public function projects()
     {
+
         if (auth()->user()->hasRole('supervisor')){
-        return $this->belongsToMany('App\Entities\Projects\Project', 'jobs', 'supervisor_id')
-            ->groupBy('supervisor_id')
-            ->groupBy('project_id');
+            return $this->belongsToMany('App\Entities\Projects\Project', 'user_projects', 'user_id')
+                ->groupBy('project_id');
         }else{
             return $this->belongsToMany('App\Entities\Projects\Project', 'jobs', 'worker_id')
                 ->groupBy('worker_id')

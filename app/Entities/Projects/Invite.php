@@ -10,7 +10,7 @@ class Invite extends Model
 {
 
     protected $fillable = [
-        'project_id', 'message', 'status_id', 'supervisor_id'
+        'project_id', 'message', 'status_id', 'supervisor_id', 'owner_id'
     ];
 
     public function project()
@@ -21,6 +21,12 @@ class Invite extends Model
     public function supervisor()
     {
         $user = User::where('id', $this->supervisor_id)->first();
+        return $user->name;
+    }
+
+    public function owner()
+    {
+        $user = User::where('id', $this->owner_id)->first();
         return $user->name;
     }
 

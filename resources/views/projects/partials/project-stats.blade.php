@@ -21,8 +21,8 @@
                 <div class="row">
                     <div class="col-xs-3"><i class="fa fa-paperclip fa-4x"></i></div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{ $project->jobs->count() }} Job</div>
-                        <div class="lead">{{ $project->tasks->count() }} Task</div>
+                        <div class="huge">{{ $project->jobs->count() }} Milestone</div>
+                        <div class="lead">{{ $project->tasks->count() }} Deliverable</div>
                     </div>
                 </div>
             </div>
