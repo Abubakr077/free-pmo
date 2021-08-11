@@ -13,9 +13,9 @@
             {!! FormField::email('email', ['label' => false, 'placeholder'=> __('auth.email')]) !!}
             {!! FormField::password('password', ['label' => false, 'placeholder'=> __('auth.password')]) !!}
             {{ Form::submit(__('auth.login'), ['class' => 'btn btn-success btn-block']) }}
-            {{ link_to_route('auth.google', __('Google Login'), ['class' => 'btn btn-default']) }}
             {{ link_to_route('auth.reset-request', __('auth.forgot_password'), [], ['class' => 'btn btn-link']) }}
             {{ link_to_route('auth.request', __('Request Account'), [], ['class' => 'btn btn-link']) }}
+            <a href="{{ url('/redirect') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
             {{ Form::close() }}
         </div>
     </div>

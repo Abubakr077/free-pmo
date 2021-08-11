@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -147,7 +148,12 @@ class LoginController extends Controller
         $userData = $request->validate([
             'name'     => 'required|min:5',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'nullable|between:6,15',
+            'password' => ['nullable', Password::min(6)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+            ],
             'role'     => 'required|array',
         ]);
 

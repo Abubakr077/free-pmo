@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use Option;
 
 /**
  * Agency Profile Controller.
@@ -50,14 +49,14 @@ class AgencyController extends Controller
             'tax_id'  => 'nullable|string|max:255',
         ]);
 
-        Option::set('agency_name', request('name'));
-        Option::set('agency_tagline', request('tagline'));
-        Option::set('agency_email', request('email'));
-        Option::set('agency_website', request('website'));
-        Option::set('agency_address', request('address'));
-        Option::set('agency_city', request('city'));
-        Option::set('agency_phone', request('phone'));
-        Option::set('agency_tax_id', request('tax_id'));
+        \Option::set('agency_name', request('name'));
+        \Option::set('agency_tagline', request('tagline'));
+        \Option::set('agency_email', request('email'));
+        \Option::set('agency_website', request('website'));
+        \Option::set('agency_address', request('address'));
+        \Option::set('agency_city', request('city'));
+        \Option::set('agency_phone', request('phone'));
+        \Option::set('agency_tax_id', request('tax_id'));
 
         flash(__('agency.updated'), 'success');
 
@@ -77,11 +76,11 @@ class AgencyController extends Controller
             'logo.file_extension' => __('validation.agency.logo.file_extension'),
         ]);
 
-        \File::delete(storage_path('app/public/assets/imgs/'.Option::get('agency_logo_path')));
+        \File::delete(storage_path('assets/imgs/'.\Option::get('agency_logo_path')));
 
         $filename = $file['logo']->getClientOriginalName();
-        $file['logo']->move(storage_path('app/public/assets/imgs'), $filename);
-        Option::set('agency_logo_path', $filename);
+        $file['logo']->move(storage_path(' assets/imgs'), $filename);
+        \Option::set('agency_logo_path', $filename);
         flash(__('agency.updated'), 'success');
 
         return redirect()->route('users.agency.show');

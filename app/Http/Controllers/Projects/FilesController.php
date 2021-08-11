@@ -102,7 +102,7 @@ class FilesController extends Controller
     {
         $file = $data['file'];
 //        $fileName = $file->hashName();
-        $fileName = hash_hmac('sha1', $file, env('APP_KEY'));
+        $fileName = hash_hmac('sha256', $file, env('APP_KEY'));
 
         $fileData['fileable_id'] = $fileableId;
         $fileData['fileable_type'] = $fileableType;

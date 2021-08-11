@@ -215,7 +215,7 @@ function app_logo_image($attributes = [])
 {
     return Html::image(
         app_logo_path(),
-        'Logo '.Option::get('agency_name', 'Laravel'),
+        'Logo '.Option::get('agency_name', 'Nust'),
         $attributes
     );
 }
@@ -230,8 +230,8 @@ function app_logo_path()
     $defaultLogoImagePath = 'default-logo.png';
     $optionLogoImagePath = Option::get('agency_logo_path');
 
-    if (is_file(storage_path('app/public/assets/imgs/'.$optionLogoImagePath))) {
-        return asset('storage/assets/imgs/'.$optionLogoImagePath);
+    if (is_file(storage_path('assets/imgs/'.$optionLogoImagePath))) {
+        return asset('assets/imgs/'.$optionLogoImagePath);
     }
 
     return asset('assets/imgs/'.$defaultLogoImagePath);

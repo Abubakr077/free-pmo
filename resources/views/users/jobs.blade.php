@@ -11,7 +11,6 @@
             <th>{{ trans('job.name') }}</th>
             <th class="text-center">{{ trans('job.tasks_count') }}</th>
             <th class="text-center">{{ trans('job.progress') }}</th>
-            <th class="text-right">{{ trans('job.price') }}</th>
             <th class="text-center">{{ trans('app.action') }}</th>
         </thead>
         <tbody>
@@ -34,7 +33,6 @@
                 </td>
                 <td class="text-center">{{ $job->tasks_count = $job->tasks->count() }}</td>
                 <td class="text-center">{{ format_decimal($job->progress = $job->progress) }} %</td>
-                <td class="text-right">{{ format_money($job->price) }}</td>
                 <td class="text-center">
                     {!! html_link_to_route('jobs.show', '', [$job], [
                         'icon' => 'search',

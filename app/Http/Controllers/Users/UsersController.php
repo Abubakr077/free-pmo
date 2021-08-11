@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Users;
 use App\Entities\Users\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 
 /**
  * Users Controller.
@@ -41,20 +43,40 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
+
         $userData = $request->validate([
             'name'     => 'required|min:5',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'nullable|between:6,15',
+            'password' => ['nullable', Password::min(6)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+            ],
             'role'     => 'required|array',
         ]);
 
         if ($userData['password']) {
+            $password = $userData['password'];
             $userData['password'] = bcrypt($userData['password']);
         } else {
-            $userData['password'] = bcrypt(\Option::get('password_default', 'member'));
+            $password = \Option::get('password_default', '123456');
+            $userData['password'] = bcrypt(\Option::get('password_default', '123456'));
         }
 
         $userData['api_token'] = Str::random(32);
+
+        Mail::send('auth.account-request-successfull', [
+            'name'      => $userData['name'],
+            'email'      => $userData['email'],
+            'password'      => $password,
+            'url'     => config('app.url'),
+            'img'     => app_logo_image(['style' => 'margin:20px auto']),
+            'organization'     => \Option::get('agency_name'),
+        ], function($message) use($request){
+            $message->subject('Reset Password Request');
+            $message->to('bakrafzal0332@gmail.com');
+        });
 
         $user = User::create($userData);
 

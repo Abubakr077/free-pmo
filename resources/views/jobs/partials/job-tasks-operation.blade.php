@@ -83,7 +83,7 @@
                 <th>{{ __('app.table_no') }}</th>
                 <th>{{ __('file.file') }}</th>
                 <th class="text-center">{{ __('file.updated_at') }}</th>
-                <th class="text-right">{{ __('Hash') }}</th>
+                <th class="text-right">{{ __('description') }}</th>
 {{--                <th class="text-right">{{ __('Hash') }}</th>--}}
                 <th class="text-center">{{ __('file.download') }}</th>
                 </thead>
@@ -93,13 +93,13 @@
                                             <td>{{ 1 + $key }}</td>
                                             <td>
                                                 <strong class="">{{ $file->title }}</strong>
-                                                <div class="text-info small">{{ $file->description }}</div>
+                                                <div class="text-info small">{{ $file->filename }}</div>
                                             </td>
                                             <td class="text-center">
                                                 <div class="">{{ $file->getDate() }}</div>
                                                 <div class="text-info small">{{ $file->getTime() }}</div>
                                             </td>
-                                            <td class="text-right">{{ $file->filename }}</td>
+                                            <td class="text-right">{{ $file->description }}</td>
 {{--                                            <td class="text-right">{{ $file->filename }}</td>--}}
                                             <td class="text-center">
                                                 {!! html_link_to_route('files.download', '', [$file->id], ['icon' => 'file', 'title' => __('file.download')]) !!}
