@@ -27,10 +27,9 @@
                             ]) !!}
                         </div>
                         <div class="panel-footer">
-                            {!! Form::submit(__('user.create'), ['class'=>'btn btn-primary']) !!}
+                            {!! Form::submit(__('Request Account'), ['class'=>'btn btn-primary']) !!}
 
-                            {!! link_to_route('auth.login', __('Login'), [], ['class'=>'btn btn-primary btn-success']) !!}
-                            {!! link_to_route('users.index', __('app.cancel'), [], ['class'=>'btn btn-default']) !!}
+                            {!! link_to_route('auth.login', __('Back'), [], ['class'=>'btn btn-default']) !!}
                         </div>
                     </div>
                     {!! Form::close() !!}
