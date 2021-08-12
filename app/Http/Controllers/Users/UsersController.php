@@ -58,12 +58,11 @@ class UsersController extends Controller
 
         if ($userData['password']) {
             $password = $userData['password'];
-            $userData['password'] = bcrypt($userData['password']);
         } else {
             $password = \Option::get('password_default', '123456');
-            $userData['password'] = bcrypt(\Option::get('password_default', '123456'));
         }
 
+        $userData['password'] = bcrypt($password);
         $userData['api_token'] = Str::random(32);
 
         Mail::send('auth.account-request-successfull', [
@@ -73,9 +72,9 @@ class UsersController extends Controller
             'url'     => config('app.url'),
             'img'     => app_logo_image(['style' => 'margin:20px auto']),
             'organization'     => \Option::get('agency_name'),
-        ], function($message) use($request){
-            $message->subject('Reset Password Request');
-            $message->to('bakrafzal0332@gmail.com');
+        ], function($message) use($userData){
+            $message->subject('Account Created in our domain');
+            $message->to($userData['email']);
         });
 
         $user = User::create($userData);

@@ -160,7 +160,7 @@ class LoginController extends Controller
         if ($userData['password']) {
             $userData['password'] = bcrypt($userData['password']);
         } else {
-            $userData['password'] = bcrypt(\Option::get('password_default', 'member'));
+            $userData['password'] = bcrypt(\Option::get('password_default', '123456'));
         }
 
         $userData['api_token'] = Str::random(32);

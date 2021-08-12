@@ -65,6 +65,7 @@ class FilesController extends Controller
         $file = File::find($fileId);
 
         if ($file && file_exists(storage_path('app/public/files/'.$file->filename))) {
+
             $extension = FileSystem::extension('public/files/'.$file->filename);
 
             return response()->download(storage_path('app/public/files/'.$file->filename), $file->title.'.'.$extension);
@@ -101,14 +102,14 @@ class FilesController extends Controller
     private function proccessPhotoUpload($data, $fileableType, $fileableId)
     {
         $file = $data['file'];
-//        $fileName = $file->hashName();
-        $fileName = hash_hmac('sha256', $file, env('APP_KEY'));
+        $fileName = $file->hashName();
 
         $fileData['fileable_id'] = $fileableId;
         $fileData['fileable_type'] = $fileableType;
         $fileData['filename'] = $fileName;
         $fileData['title'] = $data['title'];
         $fileData['description'] = $data['description'];
+        $fileData['hash'] = hash_hmac('sha256', $file, env('APP_KEY'));
         \DB::beginTransaction();
         $file->store('public/files');
         $file = File::create($fileData);

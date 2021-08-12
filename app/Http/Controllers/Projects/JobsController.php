@@ -52,6 +52,9 @@ class JobsController extends Controller
     public function store(CreateRequest $req, $projectId)
     {
         $job = $this->repo->createJob($req->except('_token'), $projectId);
+        \DB::table('projects')
+            ->where('id', $projectId)
+            ->update(['status_id' => 2]);
         flash(__('job.created'), 'success');
 
         return redirect()->route('jobs.show', $job->id);

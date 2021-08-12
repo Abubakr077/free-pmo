@@ -25,11 +25,8 @@
                         <td width="8" style="width:8px"></td>
                         <td>
                             <div style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px;padding:40px 20px 36px 20px"
-                                 align="center" class="m_7656090097181243823mdv2rw"><div
-                                                                                         style="width:150px;height:48px;margin-bottom:16px"
-                                                                                         class="CToWUd">
+                                 align="center" class="m_7656090097181243823mdv2rw">
                                 {{$img}}
-                                </div>
                                 <div style="font-family:'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-bottom:thin solid #dadce0;color:rgba(0,0,0,0.87);line-height:32px;padding-bottom:24px;text-align:center;word-break:break-word">
                                     <div style="font-size:24px">Hi {{$name}}</div>
                                 </div>

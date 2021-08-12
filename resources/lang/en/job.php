@@ -19,7 +19,7 @@ return [
     'target'        => 'Target',
     'actual'        => 'Actual',
     'duration'      => 'Duration',
-    'select_worker' => 'Select Worker',
+    'select_worker' => 'Select Student',
 
     // Actions
     'create'                 => 'Create new Milestone',
@@ -42,7 +42,7 @@ return [
     'name'              => 'Milestone Name',
     'description'       => 'Description',
     'progress'          => 'Progress',
-    'worker'            => 'Worker',
+    'worker'            => 'Student',
     'price'             => 'Price',
     'type'              => 'Milestone Type',
     'target_start_date' => 'Target Start Date',

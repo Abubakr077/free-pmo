@@ -31,7 +31,6 @@
     <div class="col-md-3 text-center">
         {{ Form::open(['route' => 'users.agency.logo-upload', 'method' => 'patch', 'files' => true]) }}
         <legend>{{ __('agency.logo') }}</legend>
-        <p>{!! app_logo_path() !!}</p>
         <p>{!! app_logo_image(['style' => 'margin:20px auto']) !!}</p>
         {!! FormField::file('logo', [
             'label' => __('agency.logo_change'),

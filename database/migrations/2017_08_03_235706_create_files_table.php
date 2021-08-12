@@ -19,6 +19,7 @@ class CreateFilesTable extends Migration
             $table->string('fileable_type', 60);
             $table->tinyInteger('type_id')->unsigned()->nullable();
             $table->string('filename', 60);
+            $table->string('hash', 60);
             $table->string('title', 60);
             $table->string('description')->nullable();
             $table->timestamps();

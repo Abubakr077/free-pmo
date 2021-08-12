@@ -17,7 +17,8 @@ class Lang
     public function handle($request, Closure $next)
     {
         if ($request->user()) {
-            app()->setLocale($request->user()->lang);
+//            app()->setLocale($request->user()->lang);
+            app()->setLocale('en');
         }
 
         return $next($request);

@@ -36,7 +36,7 @@ return [
     'role'  => 'Role',
     'roles' => [
         'admin'  => 'Administrator',
-        'worker' => 'Worker',
+//        'worker' => 'Worker',
         'supervisor' => 'Supervisor',
         'student' => 'Student',
     ],

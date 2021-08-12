@@ -68,7 +68,7 @@ return [
     'cost_proposal' => 'Cost Proposal',
     'invoices'      => 'Invoice List',
     'customer'      => 'Supervisor',
-    'worker'        => 'Worker',
+    'worker'        => 'Student',
     'subscriptions' => 'Subscriptions',
     'status'        => 'Project Status',
     'payments'      => 'Payments',
